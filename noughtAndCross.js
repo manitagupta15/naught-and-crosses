@@ -19,7 +19,6 @@ scoreY.disabled = true;
 let count = 0;
 
 function handleButtonClick(event) {
-
   if (event.target.innerText !== "X" && event.target.innerText !== "O") {
     if (count % 2 !== 0) {
       //if odd
@@ -30,6 +29,7 @@ function handleButtonClick(event) {
       event.target.innerText = "O";
       count++;
     }
+    winStatus.innerText = event.target.innerText + "'s Turn Now!!";
     event.target.disabled = true;
 
     const flag = checkForWinner();
@@ -41,6 +41,7 @@ function handleButtonClick(event) {
       } else {
         scoreY.innerText++;
       }
+      winStatus.innerText = event.target.innerText + " WINS!!";
       if (
         confirm(
           "Its a Win for " + event.target.innerText,
@@ -51,7 +52,6 @@ function handleButtonClick(event) {
       } else {
         window.alert("Thanks for trying our app!");
       }
-
     }
 
     if (flag === 0 && areAllButtonsDisabled()) {
