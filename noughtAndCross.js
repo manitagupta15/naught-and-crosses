@@ -23,13 +23,13 @@ function handleButtonClick(event) {
     if (count % 2 !== 0) {
       //if odd
       count++;
-
       event.target.innerText = "X";
+      winStatus.innerText = "O's Turn Now!!";
     } else {
       event.target.innerText = "O";
+      winStatus.innerText = "X's Turn Now!!";
       count++;
     }
-    winStatus.innerText = event.target.innerText + "'s Turn Now!!";
     event.target.disabled = true;
 
     const flag = checkForWinner();
@@ -77,7 +77,8 @@ function areAllButtonsDisabled() {
     button9.disabled === true
   ) {
     return true;
-  } else return false;
+  }
+  return false;
 }
 
 function resetButtons() {
