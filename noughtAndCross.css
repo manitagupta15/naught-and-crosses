@@ -1,5 +1,6 @@
-
-
+*{
+    background-color: #7f7dc4;
+}
 #table,
 .table2,
 .table3 {
@@ -13,7 +14,7 @@
 }
 
 td {
-  border: 10px solid #050428;
+  border: 10px solid #08068c;
   height: 130px;
   width: 130px;
   text-align: center;
@@ -22,7 +23,7 @@ td {
 
 h1 {
   text-align: center;
-  color: #1b0505;
+  color: #120a0a;
 }
 
 button {
