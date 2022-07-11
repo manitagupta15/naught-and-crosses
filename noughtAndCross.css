@@ -1,0 +1,34 @@
+#table {
+  border-color: black;
+  border: solid;
+  border-width: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+table td {
+  border: 10px solid #a53030;
+}
+
+td {
+  height: 130px;
+  width: 130px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+h1 {
+  text-align: center;
+  color: #a53030;
+}
+
+button {
+  height: 130px;
+  width: 130px;
+}
+
+#winstatus {
+  margin-left: 45%;
+}
