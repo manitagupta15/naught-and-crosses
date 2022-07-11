@@ -17,6 +17,8 @@ scoreX.disabled = true;
 scoreY.disabled = true;
 
 let count = 0;
+scoreX.innerText = Number(localStorage.scoreX);
+scoreY.innerText = Number(localStorage.scoreY);
 
 function handleButtonClick(event) {
   if (event.target.innerText !== "X" && event.target.innerText !== "O") {
@@ -37,28 +39,37 @@ function handleButtonClick(event) {
     if (flag === 1) {
       // theres a winner
       if (event.target.innerText === "O") {
-        scoreX.innerText++;
+        scoreX.innerText = Number(localStorage.scoreX) + 1;
+        localStorage.setItem("scoreX", scoreX.innerText);
       } else {
-        scoreY.innerText++;
+        scoreY.innerText = Number(localStorage.scoreY) + 1;
+        localStorage.setItem("scoreY", scoreY.innerText);
       }
+
       winStatus.innerText = event.target.innerText + " WINS!!";
+
       if (
         confirm(
-          "Its a Win for " + event.target.innerText,
-          "\nDo you want to play again?"
+          "Its a Win for " +
+            event.target.innerText +
+            "\nDo you want to play again?"
         )
       ) {
-        resetButtons();
+        window.location.reload();
       } else {
         window.alert("Thanks for trying our app!");
+        localStorage.setItem("scoreX", "0");
+        localStorage.setItem("scoreY", "0");
       }
     }
 
     if (flag === 0 && areAllButtonsDisabled()) {
       if (confirm("Its a Tie. Do you want to play again?")) {
-        resetButtons();
+        window.location.reload();
       } else {
         window.alert("Thanks for trying our app!");
+        localStorage.setItem("scoreX", "0");
+        localStorage.setItem("scoreY", "0");
       }
     }
   }
@@ -79,27 +90,6 @@ function areAllButtonsDisabled() {
     return true;
   }
   return false;
-}
-
-function resetButtons() {
-  button1.innerText = "1";
-  button2.innerText = "2";
-  button3.innerText = "3";
-  button4.innerText = "4";
-  button5.innerText = "5";
-  button6.innerText = "6";
-  button7.innerText = "7";
-  button8.innerText = "8";
-  button9.innerText = "9";
-  button1.disabled = false;
-  button2.disabled = false;
-  button3.disabled = false;
-  button4.disabled = false;
-  button5.disabled = false;
-  button6.disabled = false;
-  button7.disabled = false;
-  button8.disabled = false;
-  button9.disabled = false;
 }
 
 function checkForWinner() {
@@ -153,7 +143,7 @@ function checkForWinner() {
     return flag;
   }
 
-  //for checking diagnols
+  //for checking diagonals
 
   if (
     button1.innerText === button5.innerText &&
