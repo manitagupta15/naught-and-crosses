@@ -13,14 +13,12 @@ const scoreY = document.getElementById("scoreY");
 
 const buttons = document.querySelectorAll("button");
 winStatus.disabled = true;
-let count = 0;
-// X is Odd
-//O is even
+scoreX.disabled = true;
+scoreY.disabled = true;
 
-let turn = 0;
+let count = 0;
 
 function handleButtonClick(event) {
-  //  let clickedButton = event.target.id;
 
   if (event.target.innerText !== "X" && event.target.innerText !== "O") {
     if (count % 2 !== 0) {
@@ -32,11 +30,10 @@ function handleButtonClick(event) {
       event.target.innerText = "O";
       count++;
     }
-    event.disabled = true;
+    event.target.disabled = true;
 
     const flag = checkForWinner();
 
-    console.dir(event);
     if (flag === 1) {
       // theres a winner
       if (event.target.innerText === "O") {
@@ -50,41 +47,58 @@ function handleButtonClick(event) {
           "\nDo you want to play again?"
         )
       ) {
-        button1.innerText = "1";
-        button2.innerText = "2";
-        button3.innerText = "3";
-        button4.innerText = "4";
-        button5.innerText = "5";
-        button6.innerText = "6";
-        button7.innerText = "7";
-        button8.innerText = "8";
-        button9.innerText = "9";
-        button1.disabled = false;
-        button2.disabled = false;
-        button3.disabled = false;
-        button4.disabled = false;
-        button5.disabled = false;
-        button6.disabled = false;
-        button7.disabled = false;
-        button8.disabled = false;
-        button9.disabled = false;
+        resetButtons();
       } else {
         window.alert("Thanks for trying our app!");
       }
 
-      //console.log(event.target.innerText, "wins");
-
-      // disable buttons after win
-      /* for (let i = 0; i < 9; i++) {
-        buttons[i].disabled = true;
-      } */
     }
-    console.log(count, " << count");
 
-    if (flag === 0 && count === 9) {
-      winStatus.innerText = "Its a Tie";
+    if (flag === 0 && areAllButtonsDisabled()) {
+      if (confirm("Its a Tie. Do you want to play again?")) {
+        resetButtons();
+      } else {
+        window.alert("Thanks for trying our app!");
+      }
     }
   }
+}
+
+function areAllButtonsDisabled() {
+  if (
+    button1.disabled === true &&
+    button2.disabled === true &&
+    button3.disabled === true &&
+    button4.disabled === true &&
+    button5.disabled === true &&
+    button6.disabled === true &&
+    button7.disabled === true &&
+    button8.disabled === true &&
+    button9.disabled === true
+  ) {
+    return true;
+  } else return false;
+}
+
+function resetButtons() {
+  button1.innerText = "1";
+  button2.innerText = "2";
+  button3.innerText = "3";
+  button4.innerText = "4";
+  button5.innerText = "5";
+  button6.innerText = "6";
+  button7.innerText = "7";
+  button8.innerText = "8";
+  button9.innerText = "9";
+  button1.disabled = false;
+  button2.disabled = false;
+  button3.disabled = false;
+  button4.disabled = false;
+  button5.disabled = false;
+  button6.disabled = false;
+  button7.disabled = false;
+  button8.disabled = false;
+  button9.disabled = false;
 }
 
 function checkForWinner() {
