@@ -1,5 +1,6 @@
-*{
-    background-color: #7f7dc4;
+* {
+  background-image: url("background.png");
+  background-color: #e5e5d9;
 }
 #table,
 .table2,
@@ -15,8 +16,8 @@
 
 td {
   border: 10px solid #08068c;
-  height: 130px;
-  width: 130px;
+  height: 50px;
+  width: 50px;
   text-align: center;
   vertical-align: middle;
 }
@@ -27,22 +28,39 @@ h1 {
 }
 
 button {
-  height: 130px;
-  width: 130px;
+  height: 60px;
+  width: 60px;
 }
 
 #winstatus {
-  height: 100px;
+  height: 50px;
   width: 390px;
 }
 
 .table3,
 .table2 {
+  color: rgb(222, 86, 23);
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
 }
 
 button {
+  color: rgb(13, 80, 13);
   font-size: 26px;
+}
+
+#p1,
+#scoreX,
+#scoreY,
+#p2 {
+  color: #1b0db7;
+  font-weight: bold;
+  height: 40px;
+  width: 100px;
+}
+
+.table2 td,
+.table3 td {
+  border-color: rgb(19, 68, 42);
 }
