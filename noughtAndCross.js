@@ -17,8 +17,7 @@ let count = 0;
 // X is Odd
 //O is even
 
-let score1 = 0;
-score1 = localStorage.setItem("score", score1);
+let turn = 0;
 
 function handleButtonClick(event) {
   //  let clickedButton = event.target.id;
@@ -69,13 +68,6 @@ function handleButtonClick(event) {
         button7.disabled = false;
         button8.disabled = false;
         button9.disabled = false;
-
-        if (event.target.innerText === "X") {
-          event.target.innerText = "O";
-        } else {
-          event.target.innerText = "X";
-        }
-        count = 0;
       } else {
         window.alert("Thanks for trying our app!");
       }
