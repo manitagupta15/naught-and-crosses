@@ -8,14 +8,21 @@ const button7 = document.getElementById("7");
 const button8 = document.getElementById("8");
 const button9 = document.getElementById("9");
 const winStatus = document.getElementById("winstatus");
+const scoreX = document.getElementById("scoreX");
+const scoreY = document.getElementById("scoreY");
 
 const buttons = document.querySelectorAll("button");
+winStatus.disabled = true;
 let count = 0;
 // X is Odd
 //O is even
 
+let score1 = 0;
+score1 = localStorage.setItem("score", score1);
+
 function handleButtonClick(event) {
   //  let clickedButton = event.target.id;
+
   if (event.target.innerText !== "X" && event.target.innerText !== "O") {
     if (count % 2 !== 0) {
       //if odd
@@ -30,27 +37,59 @@ function handleButtonClick(event) {
 
     const flag = checkForWinner();
 
-    let myFlag = true;
-
+    console.dir(event);
     if (flag === 1) {
-      winStatus.innerText = "Its a Win for " + event.target.innerText;
+      // theres a winner
+      if (event.target.innerText === "O") {
+        scoreX.innerText++;
+      } else {
+        scoreY.innerText++;
+      }
+      if (
+        confirm(
+          "Its a Win for " + event.target.innerText,
+          "\nDo you want to play again?"
+        )
+      ) {
+        button1.innerText = "1";
+        button2.innerText = "2";
+        button3.innerText = "3";
+        button4.innerText = "4";
+        button5.innerText = "5";
+        button6.innerText = "6";
+        button7.innerText = "7";
+        button8.innerText = "8";
+        button9.innerText = "9";
+        button1.disabled = false;
+        button2.disabled = false;
+        button3.disabled = false;
+        button4.disabled = false;
+        button5.disabled = false;
+        button6.disabled = false;
+        button7.disabled = false;
+        button8.disabled = false;
+        button9.disabled = false;
 
-      console.log(event.target.innerText, "wins");
+        if (event.target.innerText === "X") {
+          event.target.innerText = "O";
+        } else {
+          event.target.innerText = "X";
+        }
+        count = 0;
+      } else {
+        window.alert("Thanks for trying our app!");
+      }
 
-      for (let i = 0; i < 9; i++) {
+      //console.log(event.target.innerText, "wins");
+
+      // disable buttons after win
+      /* for (let i = 0; i < 9; i++) {
         buttons[i].disabled = true;
-        console.dir(buttons[i]);
-      }
+      } */
     }
+    console.log(count, " << count");
 
-    for (let i = 0; i < 9; i++) {
-      if (buttons[i].disabled !== true) {
-        myFlag = false;
-      }
-    }
-    console.log(myFlag, "<===myflag");
-    if (flag === 0 && myFlag === true) {
-      console.log("Its a tie");
+    if (flag === 0 && count === 9) {
       winStatus.innerText = "Its a Tie";
     }
   }
