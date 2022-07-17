@@ -10,17 +10,21 @@ const button9 = document.getElementById("9");
 const winStatus = document.getElementById("winstatus");
 const scoreX = document.getElementById("scoreX");
 const scoreY = document.getElementById("scoreY");
+
 const buttons = document.querySelectorAll("button");
 winStatus.disabled = true;
 scoreX.disabled = true;
 scoreY.disabled = true;
+
 let count = 0;
+scoreX.innerText = Number(localStorage.scoreX);
+scoreY.innerText = Number(localStorage.scoreY);
+
 function handleButtonClick(event) {
   if (event.target.innerText !== "X" && event.target.innerText !== "O") {
     if (count % 2 !== 0) {
       //if odd
       count++;
-
       event.target.innerText = "X";
       winStatus.innerText = "O's Turn Now!!";
     } else {
@@ -31,34 +35,46 @@ function handleButtonClick(event) {
     event.target.disabled = true;
 
     const flag = checkForWinner();
+
     if (flag === 1) {
       // theres a winner
       if (event.target.innerText === "O") {
-        scoreX.innerText++;
+        scoreX.innerText = Number(localStorage.scoreX) + 1;
+        localStorage.setItem("scoreX", scoreX.innerText);
       } else {
-        scoreY.innerText++;
+        scoreY.innerText = Number(localStorage.scoreY) + 1;
+        localStorage.setItem("scoreY", scoreY.innerText);
       }
+
       winStatus.innerText = event.target.innerText + " WINS!!";
+
       if (
         confirm(
-          "Its a Win for " + event.target.innerText,
-          "\nDo you want to play again?"
+          "Its a Win for " +
+            event.target.innerText +
+            "\nDo you want to play again?"
         )
       ) {
-        resetButtons();
+        window.location.reload();
       } else {
         window.alert("Thanks for trying our app!");
+        localStorage.setItem("scoreX", "0");
+        localStorage.setItem("scoreY", "0");
       }
     }
+
     if (flag === 0 && areAllButtonsDisabled()) {
       if (confirm("Its a Tie. Do you want to play again?")) {
-        resetButtons();
+        window.location.reload();
       } else {
         window.alert("Thanks for trying our app!");
+        localStorage.setItem("scoreX", "0");
+        localStorage.setItem("scoreY", "0");
       }
     }
   }
 }
+
 function areAllButtonsDisabled() {
   if (
     button1.disabled === true &&
@@ -76,28 +92,9 @@ function areAllButtonsDisabled() {
   return false;
 }
 
-function resetButtons() {
-  button1.innerText = "1";
-  button2.innerText = "2";
-  button3.innerText = "3";
-  button4.innerText = "4";
-  button5.innerText = "5";
-  button6.innerText = "6";
-  button7.innerText = "7";
-  button8.innerText = "8";
-  button9.innerText = "9";
-  button1.disabled = false;
-  button2.disabled = false;
-  button3.disabled = false;
-  button4.disabled = false;
-  button5.disabled = false;
-  button6.disabled = false;
-  button7.disabled = false;
-  button8.disabled = false;
-  button9.disabled = false;
-}
 function checkForWinner() {
   let flag = 0;
+
   //for checling rows
   if (
     button1.innerText === button2.innerText &&
@@ -120,6 +117,7 @@ function checkForWinner() {
     flag = 1;
     return flag;
   }
+
   // for checking column
   if (
     button1.innerText === button4.innerText &&
@@ -128,6 +126,7 @@ function checkForWinner() {
     flag = 1;
     return flag;
   }
+
   if (
     button2.innerText === button5.innerText &&
     button2.innerText === button8.innerText
@@ -135,6 +134,7 @@ function checkForWinner() {
     flag = 1;
     return flag;
   }
+
   if (
     button3.innerText === button6.innerText &&
     button3.innerText === button9.innerText
@@ -142,7 +142,9 @@ function checkForWinner() {
     flag = 1;
     return flag;
   }
-  //for checking diagnols
+
+  //for checking diagonals
+
   if (
     button1.innerText === button5.innerText &&
     button1.innerText === button9.innerText
@@ -150,6 +152,7 @@ function checkForWinner() {
     flag = 1;
     return flag;
   }
+
   if (
     button3.innerText === button5.innerText &&
     button3.innerText === button7.innerText
@@ -157,8 +160,10 @@ function checkForWinner() {
     flag = 1;
     return flag;
   }
+
   return flag;
 }
+
 button1.addEventListener("click", handleButtonClick);
 button2.addEventListener("click", handleButtonClick);
 button3.addEventListener("click", handleButtonClick);
