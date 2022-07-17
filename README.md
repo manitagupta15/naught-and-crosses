@@ -1,6 +1,6 @@
 # DOM Mini-Apps (Naught and Crosses)
 
-https://manitagupta15.github.io/fe-dom-mini-apps/
+https://manitagupta15.github.io/Noughts-and-Crosses/
 
 This is simple website that your users can interact with using DOM.
 
