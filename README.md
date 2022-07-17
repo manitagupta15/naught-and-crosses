@@ -1,4 +1,4 @@
-# DOM Mini-Apps (Naught and Crosses)
+# DOM Mini-Apps (Naughts and Crosses)
 
 https://manitagupta15.github.io/Noughts-and-Crosses/
 
